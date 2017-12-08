@@ -9,7 +9,7 @@ public class VREyeRaycaster : MonoBehaviour {
     [SerializeField] private Image loadingField; //the image of the loading bar/circle 
     [SerializeField] private float loadingSpeed; //how fast the loading bar gets full
     public GameObject viewedItem; //the item you are looking at
-    public VRInteractiveItem vrItem;
+    public VRInteractiveItem vrItem; //reference to the VRInteractiveItem script
 
 	// Use this for initialization
 	void Start ()
