@@ -10,40 +10,44 @@ public class VREyeRaycaster : MonoBehaviour {
     [SerializeField] private float loadingSpeed; //how fast the loading bar gets full
     public GameObject viewedItem; //the item you are looking at
     public VRInteractiveItem vrItem; //reference to the VRInteractiveItem script
+    [Space][Header("Item holding variables")]
+    public GameObject holdGObject;
+    public Transform holdPosition; //The position where the pickup will be held at
+    public bool isHolding = false;
 
 	// Use this for initialization
 	void Start ()
     {
-		
+        holdPosition = holdGObject.transform;
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         RaycastHit Hit;
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-
-        if (Physics.Raycast(ray.origin, ray.direction, out Hit, Mathf.Infinity, interactableLayer))
+        if (isHolding == false)
         {
-            loadingField.fillAmount += loadingSpeed;
-            if (loadingField.fillAmount == 1)
+            if (Physics.Raycast(ray.origin, ray.direction, out Hit, Mathf.Infinity, interactableLayer))
             {
-                viewedItem = Hit.transform.gameObject;
-                vrItem = viewedItem.GetComponent<VRInteractiveItem>();
-                vrItem.Selected();
+                loadingField.fillAmount += loadingSpeed;
+                if (loadingField.fillAmount == 1)
+                {
+                    viewedItem = Hit.transform.gameObject;
+                    vrItem = viewedItem.GetComponent<VRInteractiveItem>();
+                    vrItem.Selected();
+                }
+            }
+            else if (!Physics.Raycast(ray.origin, ray.direction, out Hit, Mathf.Infinity, interactableLayer))
+            {
+                if (viewedItem != null)
+                {
+                    vrItem.Deselected();
+                }
+                loadingField.fillAmount = 0;
+                vrItem = null;
+                viewedItem = null;
             }
         }
-        else if (!Physics.Raycast(ray.origin, ray.direction, out Hit, Mathf.Infinity, interactableLayer))
-        {
-            if (viewedItem != null)
-            {
-                vrItem.Deselected();
-            }
-            loadingField.fillAmount = 0;
-            vrItem = null;
-            viewedItem = null;
-        }
-
-
     }
 }
