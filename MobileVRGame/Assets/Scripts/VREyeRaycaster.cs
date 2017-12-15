@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class VREyeRaycaster : MonoBehaviour {
 
     public LayerMask interactableLayer; //the layer of objects the gaze controller can interact with
-    [SerializeField] private Image loadingField; //the image of the loading bar/circle 
+    public Image loadingField; //the image of the loading bar/circle 
     [SerializeField] private float loadingSpeed; //how fast the loading bar gets full
     public GameObject viewedItem; //the item you are looking at
     public VRInteractiveItem vrItem; //reference to the VRInteractiveItem script
