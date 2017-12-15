@@ -10,6 +10,7 @@ public class VREyeRaycaster : MonoBehaviour {
     [SerializeField] private float loadingSpeed; //how fast the loading bar gets full
     public GameObject viewedItem; //the item you are looking at
     public VRInteractiveItem vrItem; //reference to the VRInteractiveItem script
+
     [Space][Header("Item holding variables")]
     public GameObject holdGObject;
     public Transform holdPosition; //The position where the pickup will be held at
