@@ -37,7 +37,7 @@ public class VREyeRaycaster : MonoBehaviour {
         {
             if (viewedItem != null)
             {
-                //vrItem.Deselected();
+                vrItem.Deselected();
             }
             loadingField.fillAmount = 0;
             vrItem = null;
