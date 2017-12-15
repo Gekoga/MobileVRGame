@@ -8,6 +8,7 @@ public class VRInteractiveItem : MonoBehaviour {
         Teleport,
         Pickup,
         Button,
+        Key,
     }
 
     public Renderer renderer; //the renderer for the colors
@@ -37,7 +38,6 @@ public class VRInteractiveItem : MonoBehaviour {
         {
             doorRenderer = doorLock.GetComponent<MeshRenderer>();
         }
-        
     }
 	
 	// Update is called once per frame
@@ -67,6 +67,7 @@ public class VRInteractiveItem : MonoBehaviour {
 
                     vrEye.isHolding = true;
                     StartCoroutine(HoldTimer());
+                    vrEye.loadingField.fillAmount = 0;
                 }
                 else if (inv.items.Contains(gameObject))
                 {
@@ -75,6 +76,9 @@ public class VRInteractiveItem : MonoBehaviour {
                 break;
             case Interactables.Button:
                 print("Button");
+                break;
+            case Interactables.Key:
+                print("key");
                 break;
             default:
                 print("default");

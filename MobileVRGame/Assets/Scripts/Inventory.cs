@@ -5,6 +5,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour {
 
     public List<GameObject> items = new List<GameObject>();
+    public List<GameObject> keys = new List<GameObject>();
 
     bool alreadyOpen = false;
 
