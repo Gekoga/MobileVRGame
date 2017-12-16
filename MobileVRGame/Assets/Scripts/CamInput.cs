@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class CamInput : MonoBehaviour {
 
-    public float speedH = 2.0f;
-    public float speedV = 2.0f;
+    public float speedH = 2.0f; //How fast the camera can move from left to right
+    public float speedV = 2.0f; //How fast the camera can move from up to down
 
-    private float yaw = 0.0f;
-    private float pitch = 0.0f;
+    private float yaw = 0.0f;   //How to move the cam
+    private float pitch = 0.0f; //How to move the cam
+
     private void Start()
     {
         Cursor.visible = false;

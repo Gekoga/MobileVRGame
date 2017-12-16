@@ -9,31 +9,35 @@ public class VRInteractiveItem : MonoBehaviour {
         Pickup,
         Button,
         Key,
+        Furniture,
     }
+    
+    public VREyeRaycaster vrEye;        //Reference to the main cam
+    public Inventory inv;               //Reference to the inventory script
 
-    public Renderer renderer; //the renderer for the colors
-    public Color startcolor; //the color the object has if you start the game
-    public Color newColor; //the selected color
-    public Vector3 offset; //the distance between the player and the center of the object
-    public Vector3 startPos;
+    public Renderer renderer;           //The renderer for the colors
+    public Color startcolor;            //The color the object has if you start the game
+    public Color newColor;              //The selected color
+    private Vector3 offset;              //The distance between the player and the center of the object
+    private Vector3 startPos;            //The position it is when the game starts
 
-    public GameObject doorLock;
-    public MeshRenderer doorRenderer;
+    public GameObject doorLock;         //The gameobject that turns green when you collect a pickup
+    public MeshRenderer doorRenderer;   //How you make doorLock green
 
-    public VREyeRaycaster vrEye; //reference to the main cam
-    public Inventory inv; //reference to the inventory script
-
-    public Interactables interactables;
+    public Interactables interactables; 
 
 	// Use this for initialization
 	void Start()
     { 
+        //Get startposition
         offset = new Vector3(0, 2, 0);
         startPos = gameObject.transform.position;
 
+        //Get startcolor
         renderer = GetComponent<Renderer>();
         renderer.material.color = startcolor;
 
+        //Check if it is a pickup, Yes? Then get the doorRenderer
         if (interactables == Interactables.Pickup)
         {
             doorRenderer = doorLock.GetComponent<MeshRenderer>();
@@ -46,10 +50,12 @@ public class VRInteractiveItem : MonoBehaviour {
 		
 	}
 
+    //You have the object selected
     public void Selected ()
     {
         renderer.material.color = newColor;
 
+        //Check what the function is
         switch (interactables)
         {
             case Interactables.Teleport:
@@ -59,26 +65,26 @@ public class VRInteractiveItem : MonoBehaviour {
                 break;
             case Interactables.Pickup:
                 print("Pickup");
-                if (!inv.items.Contains(gameObject))
-                {
-                    inv.items.Add(this.gameObject);
-                    doorRenderer.material.color = startcolor;
-                    startcolor = newColor;
-
-                    vrEye.isHolding = true;
-                    StartCoroutine(HoldTimer());
-                    vrEye.loadingField.fillAmount = 0;
-                }
-                else if (inv.items.Contains(gameObject))
-                {
-                    print("you already collected this");
-                }
+                UpdatePickupInventory();
                 break;
             case Interactables.Button:
                 print("Button");
                 break;
             case Interactables.Key:
                 print("key");
+                if (!inv.keys.Contains(gameObject))
+                {
+                    inv.keys.Add(this.gameObject);
+                    gameObject.SetActive(false);
+                    inv.ItemCounter();
+                }
+                else if (inv.keys.Contains(gameObject))
+                {
+                    print("how are you doing this you aren't able to see the key");
+                }
+                break;
+            case Interactables.Furniture:
+                print("Play animation");
                 break;
             default:
                 print("default");
@@ -86,12 +92,35 @@ public class VRInteractiveItem : MonoBehaviour {
         }
     }
 
+    //Deselected? Give the object it's startcolor
     public void Deselected()
     {
         renderer.material.color = startcolor;
     }
 
     #region Pickup Holding
+    void UpdatePickupInventory()
+    {
+        //Add the item in the Inventory
+        if (!inv.items.Contains(gameObject))
+        {
+            inv.items.Add(this.gameObject);
+            inv.ItemCounter();
+            doorRenderer.material.color = startcolor;
+            startcolor = newColor;
+
+            vrEye.isHolding = true;
+            StartCoroutine(HoldTimer());
+            vrEye.loadingField.fillAmount = 0;
+        }
+        //You have allready collected this item
+        else if (inv.items.Contains(gameObject))
+        {
+            print("you already collected this");
+        }
+    }
+
+    //Move the pickup to the holdposition
     void HoldPickup()
     {
         print("This the pickup function");
@@ -99,6 +128,7 @@ public class VRInteractiveItem : MonoBehaviour {
         this.gameObject.transform.SetPositionAndRotation(vrEye.holdPosition.position, vrEye.holdPosition.rotation);
     }
 
+    //Place it back in the scene on the original location
     void PutBackPickup()
     {
         this.gameObject.transform.SetParent(null);
@@ -106,6 +136,7 @@ public class VRInteractiveItem : MonoBehaviour {
         vrEye.isHolding = false;
     }
 
+    //Timer
     IEnumerator HoldTimer()
     {
         print("Started");

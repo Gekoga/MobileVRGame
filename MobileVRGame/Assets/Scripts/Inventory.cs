@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
-    public List<GameObject> items = new List<GameObject>();
-    public List<GameObject> keys = new List<GameObject>();
+    public List<GameObject> items = new List<GameObject>(); //List for all the pickup items
+    public List<GameObject> keys = new List<GameObject>();  //List for all the keys
+
+    public GameObject door;
 
     bool alreadyOpen = false;
 
@@ -18,13 +20,27 @@ public class Inventory : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+
+	}
+
+    public void ItemCounter()
+    {
+        //Check how many items there are in the Items list
         if (items.Count == 4 && !alreadyOpen)
         {
             print("Open the door");
             alreadyOpen = true;
             return;
         }
-	}
+
+        //Check how many items there are in the Keys list
+        if (keys.Count == 3)
+        {
+            door.SetActive(false);
+            print("the locked door is unlocked");
+            return;
+        }
+    }
 
 
 }

@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 public class VREyeRaycaster : MonoBehaviour {
 
-    public LayerMask interactableLayer; //the layer of objects the gaze controller can interact with
-    public Image loadingField; //the image of the loading bar/circle 
-    [SerializeField] private float loadingSpeed; //how fast the loading bar gets full
-    public GameObject viewedItem; //the item you are looking at
-    public VRInteractiveItem vrItem; //reference to the VRInteractiveItem script
+    public LayerMask interactableLayer;          //The layer of objects the gaze controller can interact with
+    public Image loadingField;                   //The image of the loading bar/circle 
+    [SerializeField] private float loadingSpeed; //How fast the loading bar gets full
+    public GameObject viewedItem;                //The item you are looking at
+    public VRInteractiveItem vrItem;             //Reference to the VRInteractiveItem script
 
     [Space][Header("Item holding variables")]
-    public GameObject holdGObject;
-    public Transform holdPosition; //The position where the pickup will be held at
-    public bool isHolding = false;
+    public GameObject holdGObject;               //The object to get the holdposition
+    public Transform holdPosition;               //The position where the pickup will be held at
+    public bool isHolding = false;               //Check if you have something in your hands
 
 	// Use this for initialization
 	void Start ()
