@@ -18,9 +18,14 @@ public class VRInteractiveItem : MonoBehaviour {
 
     public Interactables interactables;
 
-	// Use this for initialization
-	void Start()
-    { 
+    //public GameObject ;
+    public Vector3 startPos;
+
+    // Use this for initialization
+    void Start()
+    {
+        startPos = gameObject.transform.position;
+
         offset = new Vector3(0, 2, 0);
         renderer = GetComponent<Renderer>();
         renderer.material.color = startcolor;
@@ -45,7 +50,9 @@ public class VRInteractiveItem : MonoBehaviour {
                 break;
             case Interactables.Pickup:
                 print("Pickup");
-                break;
+                vrEye.isHolding = true;
+                StartCoroutine(HoldTimer());
+                break; 
             case Interactables.Button:
                 print("Button");
                 break;
@@ -65,4 +72,31 @@ public class VRInteractiveItem : MonoBehaviour {
         yield return new WaitForSeconds(1);
         StopCoroutine(LookAtDelay());
     }
+
+
+#region Pickup Holding
+    void HoldPickup()
+    {
+        print("This the pickup function");
+        this.gameObject.transform.SetParent(vrEye.holdPosition);
+        this.gameObject.transform.SetPositionAndRotation(vrEye.holdPosition.position, vrEye.holdPosition.rotation);
+    }
+    
+    void PutBackPickup()
+    {
+        this.gameObject.transform.SetParent(null);
+        this.gameObject.transform.position = startPos;
+        vrEye.isHolding = false;
+    }
+
+    IEnumerator HoldTimer()
+    {
+        print("Started");
+        yield return new WaitForSeconds(2);
+        HoldPickup();
+        yield return new WaitForSeconds(4);
+        PutBackPickup();
+        StopCoroutine(HoldTimer());
+    }
+#endregion
 }
