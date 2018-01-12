@@ -42,7 +42,7 @@ public class VREyeRaycaster : MonoBehaviour {
             }
             else if (!Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, interactableLayer))
             {
-                if (viewedItem != null)
+                if (viewedItem != null && vrItem.interactables != VRInteractiveItem.Interactables.Button)
                 {
                     vrItem.Deselected();
                 }

@@ -11,20 +11,25 @@ public class VRInteractiveItem : MonoBehaviour {
         Key,
         Furniture,
     }
-    
+
+    public Interactables interactables;
+
     public VREyeRaycaster vrEye;        //Reference to the main cam
     public Inventory inv;               //Reference to the inventory script
 
+    [Header("Basic stuff")]
     public Renderer renderer;           //The renderer for the colors
     public Color startcolor;            //The color the object has if you start the game
     public Color newColor;              //The selected color
-    private Vector3 offset;              //The distance between the player and the center of the object
-    private Vector3 startPos;            //The position it is when the game starts
+    private Vector3 offset;             //The distance between the player and the center of the object
+    private Vector3 startPos;           //The position it is when the game starts
 
+    [Header("Door related")]
     public GameObject doorLock;         //The gameobject that turns green when you collect a pickup
     public MeshRenderer doorRenderer;   //How you make doorLock green
 
-    public Interactables interactables; 
+    [Header("Button only")]
+    public bool rightAnswer;            //Shows if it is the right answers
 
 	// Use this for initialization
 	void Start()
@@ -34,8 +39,11 @@ public class VRInteractiveItem : MonoBehaviour {
         startPos = gameObject.transform.position;
 
         //Get startcolor
-        renderer = GetComponent<Renderer>();
-        renderer.material.color = startcolor;
+        if (interactables != Interactables.Button)
+        {
+            renderer = GetComponent<Renderer>();
+            renderer.material.color = startcolor;
+        }
 
         //Check if it is a pickup, Yes? Then get the doorRenderer
         if (interactables == Interactables.Pickup)
@@ -53,7 +61,11 @@ public class VRInteractiveItem : MonoBehaviour {
     //You have the object selected
     public void Selected ()
     {
-        renderer.material.color = newColor;
+        if (interactables != Interactables.Button)
+        {
+            renderer.material.color = newColor;
+        }
+        
 
         //Check what the function is
         switch (interactables)
@@ -69,6 +81,15 @@ public class VRInteractiveItem : MonoBehaviour {
                 break;
             case Interactables.Button:
                 print("Button");
+                if (rightAnswer)
+                {
+                    RightAnswer();
+                }
+                else if (!rightAnswer)
+                {
+                    WrongAnswer();
+                }
+                vrEye.loadingField.fillAmount = 0;
                 break;
             case Interactables.Key:
                 print("key");
@@ -96,6 +117,16 @@ public class VRInteractiveItem : MonoBehaviour {
     public void Deselected()
     {
         renderer.material.color = startcolor;
+    }
+
+    public void RightAnswer()
+    {
+        print("That is the right answer");
+    }
+
+    public void WrongAnswer()
+    {
+        print("That is the wrong answer");
     }
 
     #region Pickup Holding
