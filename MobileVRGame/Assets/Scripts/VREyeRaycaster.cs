@@ -10,6 +10,7 @@ public class VREyeRaycaster : MonoBehaviour {
     [SerializeField] private float loadingSpeed; //How fast the loading bar gets full
     public GameObject viewedItem;                //The item you are looking at
     public VRInteractiveItem vrItem;             //Reference to the VRInteractiveItem script
+    public float lookDistance;                   //How far the 
 
     [Space][Header("Item holding variables")]
     public GameObject holdGObject;               //The object to get the holdposition
@@ -29,7 +30,7 @@ public class VREyeRaycaster : MonoBehaviour {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         if (isHolding == false)
         {
-            if (Physics.Raycast(ray.origin, ray.direction, out Hit, Mathf.Infinity, interactableLayer))
+            if (Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, interactableLayer))
             {
                 loadingField.fillAmount += loadingSpeed;
                 if (loadingField.fillAmount == 1)
@@ -39,7 +40,7 @@ public class VREyeRaycaster : MonoBehaviour {
                     vrItem.Selected();
                 }
             }
-            else if (!Physics.Raycast(ray.origin, ray.direction, out Hit, Mathf.Infinity, interactableLayer))
+            else if (!Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, interactableLayer))
             {
                 if (viewedItem != null)
                 {
