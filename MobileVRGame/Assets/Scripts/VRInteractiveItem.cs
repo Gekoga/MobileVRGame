@@ -22,7 +22,8 @@ public class VRInteractiveItem : MonoBehaviour {
     public Color startcolor;            //The color the object has if you start the game
     public Color newColor;              //The selected color
     private Vector3 offset;             //The distance between the player and the center of the object
-    private Vector3 startPos;           //The position it is when the game starts
+    private Vector3 startPos;         //The position it is when the game starts
+    private Quaternion startRot;
 
     [Header("Door related")]
     public GameObject doorLock;         //The gameobject that turns green when you collect a pickup
@@ -37,6 +38,7 @@ public class VRInteractiveItem : MonoBehaviour {
         //Get startposition
         offset = new Vector3(0, 2, 0);
         startPos = gameObject.transform.position;
+        startRot = gameObject.transform.rotation;
 
         //Get startcolor
         if (interactables != Interactables.Button)
@@ -164,6 +166,7 @@ public class VRInteractiveItem : MonoBehaviour {
     {
         this.gameObject.transform.SetParent(null);
         this.gameObject.transform.position = startPos;
+        this.gameObject.transform.rotation = startRot;
         vrEye.isHolding = false;
     }
 
