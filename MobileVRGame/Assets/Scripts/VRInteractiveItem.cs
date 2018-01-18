@@ -25,9 +25,10 @@ public class VRInteractiveItem : MonoBehaviour {
     private Vector3 startPos;           //The position it is when the game starts (Pickup)
     private Quaternion startRot;        //The rotation it is when the game starts (Pickup)
 
-    [Header("Door related")]
+    [Header("Pickup only")]
     public GameObject doorLock;         //The gameobject that turns green when you collect a pickup
-    public MeshRenderer doorRenderer;   //How you make doorLock green
+    public MeshRenderer doorRenderer;   //How you make doorLock change color
+    public Color green;                 //The color the doorlocks will have once you've picked up a tablet
 
     [Header("Button only")]
     public bool rightAnswer;            //Shows if it is the right answers
@@ -36,7 +37,7 @@ public class VRInteractiveItem : MonoBehaviour {
 	void Start()
     { 
         //Get startposition
-        offset = new Vector3(0, 1.75f, 0);
+        offset = new Vector3(0, 1.5f, 0);
         startPos = gameObject.transform.position;
         startRot = gameObject.transform.rotation;
 
@@ -139,7 +140,7 @@ public class VRInteractiveItem : MonoBehaviour {
         {
             inv.items.Add(this.gameObject);
             inv.ItemCounter();
-            doorRenderer.material.color = startcolor;
+            doorRenderer.material.color = green;
             startcolor = newColor;
 
             vrEye.isHolding = true;
