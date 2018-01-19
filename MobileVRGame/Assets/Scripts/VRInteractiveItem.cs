@@ -24,7 +24,7 @@ public class VRInteractiveItem : MonoBehaviour {
     private Vector3 offset;             //The distance between the player and the center of the object
     private Vector3 startPos;           //The position it is when the game starts (Pickup)
     private Quaternion startRot;        //The rotation it is when the game starts (Pickup)
-    public GameObject camHold;
+    public GameObject camHold;          //The gameobject that you use to teleport to to a pad
 
     [Header("Pickup only")]
     public GameObject doorLock;         //The gameobject that turns green when you collect a pickup
