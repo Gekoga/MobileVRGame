@@ -26,7 +26,7 @@ public class Inventory : MonoBehaviour {
     public void ItemCounter()
     {
         //Check how many items there are in the Items list
-        if (items.Count == 4 && !alreadyOpen)
+        if (items.Count == 3 && !alreadyOpen)
         {
             print("Open the door");
             alreadyOpen = true;

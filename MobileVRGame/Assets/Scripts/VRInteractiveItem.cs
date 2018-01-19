@@ -24,6 +24,7 @@ public class VRInteractiveItem : MonoBehaviour {
     private Vector3 offset;             //The distance between the player and the center of the object
     private Vector3 startPos;           //The position it is when the game starts (Pickup)
     private Quaternion startRot;        //The rotation it is when the game starts (Pickup)
+    public GameObject camHold;
 
     [Header("Pickup only")]
     public GameObject doorLock;         //The gameobject that turns green when you collect a pickup
@@ -75,7 +76,7 @@ public class VRInteractiveItem : MonoBehaviour {
         {
             case Interactables.Teleport:
                 print("Teleport");
-                vrEye.transform.position = transform.position + offset;
+                camHold.transform.position = transform.position + offset;
                 vrEye.loadingField.fillAmount = 0;
                 break;
             case Interactables.Pickup:
