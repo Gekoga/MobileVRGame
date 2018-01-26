@@ -118,11 +118,16 @@ public class VRInteractiveItem : MonoBehaviour {
                 {
                     print("doorlock");
                     vrEye.loadingField.fillAmount = 0;
-                    inv.UseKey();
-                    usedAlready = true;
+                    if (inv.keys.Count > 0)
+                    {
+                        usedAlready = true;
+                        inv.UseKey();
+                        renderer.material.color = newColor;
+                    }
                 }
                 else if (usedAlready)
                 {
+                    renderer.material.color = newColor;
                     print("doorlock");
                     vrEye.loadingField.fillAmount = 0;
                 }
@@ -140,6 +145,10 @@ public class VRInteractiveItem : MonoBehaviour {
     public void Deselected()
     {
         renderer.material.color = startcolor;
+        if (interactables == Interactables.DoorLock)
+        {
+            renderer.material.color = newColor;
+        }
     }
 
     public void RightAnswer()

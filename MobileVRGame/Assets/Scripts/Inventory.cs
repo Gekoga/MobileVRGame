@@ -9,10 +9,9 @@ public class Inventory : MonoBehaviour {
 
     public GameObject door;
 
-    [Header("Keys")]
-    public GameObject doorLockKeyOne;
-    public GameObject doorLockKeyTwo;
-    public GameObject doorLockKeyThree;
+    [Header("animations")]
+    public Animator doorOneLeft;
+    public Animator doorOneRight;
 
     bool alreadyOpen = false;
 
@@ -35,6 +34,8 @@ public class Inventory : MonoBehaviour {
         {
             print("Open the door");
             alreadyOpen = true;
+            doorOneLeft.SetTrigger("OpenDoor");
+            doorOneRight.SetTrigger("OpenDoor");
             return;
         }
 
