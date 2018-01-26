@@ -12,6 +12,9 @@ public class VREyeRaycaster : MonoBehaviour {
     public VRInteractiveItem vrItem;             //Reference to the VRInteractiveItem script
     public float lookDistance;                   //How far the player can look
 
+    [Space]
+    public List<VRInteractiveItem> teleportPads = new List<VRInteractiveItem>();
+
     [Space][Header("Item holding variables")]
     public GameObject holdGObject;               //The object to get the holdposition
     public Transform holdPosition;               //The position where the pickup will be held at
@@ -38,6 +41,18 @@ public class VREyeRaycaster : MonoBehaviour {
                     viewedItem = Hit.transform.gameObject;
                     vrItem = viewedItem.GetComponent<VRInteractiveItem>();
                     vrItem.Selected();
+                    foreach (VRInteractiveItem pads in teleportPads)
+                    {
+                        float distance = Vector3.Distance(this.transform.position, pads.transform.position);
+                        if (distance > lookDistance)
+                        {
+                            pads.gameObject.SetActive(false);
+                        }
+                        if (distance <= lookDistance)
+                        {
+                            pads.gameObject.SetActive(true);
+                        }
+                    }
                 }
             }
             else if (!Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, interactableLayer))
