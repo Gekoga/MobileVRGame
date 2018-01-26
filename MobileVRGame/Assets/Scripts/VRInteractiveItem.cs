@@ -10,6 +10,7 @@ public class VRInteractiveItem : MonoBehaviour {
         Button,
         Key,
         Furniture,
+        DoorLock,
     }
 
     public Interactables interactables;
@@ -33,6 +34,9 @@ public class VRInteractiveItem : MonoBehaviour {
 
     [Header("Button only")]
     public bool rightAnswer;            //Shows if it is the right answers
+
+    [Header("DoorLock only")]
+    public bool usedAlready;
 
 	// Use this for initialization
 	void Start()
@@ -102,10 +106,25 @@ public class VRInteractiveItem : MonoBehaviour {
                     inv.keys.Add(this.gameObject);
                     gameObject.SetActive(false);
                     inv.ItemCounter();
+                    vrEye.loadingField.fillAmount = 0;
                 }
                 else if (inv.keys.Contains(gameObject))
                 {
                     print("how are you doing this you aren't able to see the key");
+                }
+                break;
+            case Interactables.DoorLock:
+                if (!usedAlready)
+                {
+                    print("doorlock");
+                    vrEye.loadingField.fillAmount = 0;
+                    inv.UseKey();
+                    usedAlready = true;
+                }
+                else if (usedAlready)
+                {
+                    print("doorlock");
+                    vrEye.loadingField.fillAmount = 0;
                 }
                 break;
             case Interactables.Furniture:

@@ -9,6 +9,11 @@ public class Inventory : MonoBehaviour {
 
     public GameObject door;
 
+    [Header("Keys")]
+    public GameObject doorLockKeyOne;
+    public GameObject doorLockKeyTwo;
+    public GameObject doorLockKeyThree;
+
     bool alreadyOpen = false;
 
 	// Use this for initialization
@@ -40,6 +45,22 @@ public class Inventory : MonoBehaviour {
             print("the locked door is unlocked");
             return;
         }
+    }
+
+    public void UseKey()
+    {
+        if (keys.Count > 0)
+        {
+            keys.IndexOf(keys[0]);
+            print("It works ");
+            keys[0].SetActive(true);
+            keys.Remove(keys[0]);
+        }
+        else if (keys.Count <= 0)
+        {
+            return;
+        }
+ 
     }
 
 
