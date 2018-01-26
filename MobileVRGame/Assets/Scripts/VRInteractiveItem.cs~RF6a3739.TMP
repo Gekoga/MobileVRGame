@@ -80,7 +80,8 @@ public class VRInteractiveItem : MonoBehaviour {
         {
             case Interactables.Teleport:
                 print("Teleport");
-                UpdateTeleport();
+                camHold.transform.position = transform.position + offset;
+                vrEye.loadingField.fillAmount = 0;
                 break;
             case Interactables.Pickup:
                 print("Pickup");
@@ -88,14 +89,48 @@ public class VRInteractiveItem : MonoBehaviour {
                 break;
             case Interactables.Button:
                 print("Button");
-                UpdateButtons();
+                if (rightAnswer)
+                {
+                    RightAnswer();
+                }
+                else if (!rightAnswer)
+                {
+                    WrongAnswer();
+                }
+                vrEye.loadingField.fillAmount = 0;
                 break;
             case Interactables.Key:
                 print("key");
-                UpdateKeys();
+                if (!inv.keys.Contains(gameObject))
+                {
+                    inv.keys.Add(this.gameObject);
+                    gameObject.SetActive(false);
+                    inv.ItemCounter();
+                    vrEye.loadingField.fillAmount = 0;
+                }
+                else if (inv.keys.Contains(gameObject))
+                {
+                    print("how are you doing this you aren't able to see the key");
+                }
                 break;
             case Interactables.DoorLock:
-                UpdateDoorlocks();
+                if (!usedAlready)
+                {
+                    print("doorlock");
+                    vrEye.loadingField.fillAmount = 0;
+                    if (inv.keys.Count > 0)
+                    {
+                        usedAlready = true;
+                        inv.UseKey();
+                        renderer.material.color = newColor;
+                    }
+                }
+                else if (usedAlready)
+                {
+                    renderer.material.color = newColor;
+                    print("doorlock");
+                    vrEye.loadingField.fillAmount = 0;
+                }
                 break;
             case Interactables.Furniture:
                 print("Play animation");
@@ -114,6 +149,16 @@ public class VRInteractiveItem : MonoBehaviour {
         {
             renderer.material.color = newColor;
         }
+    }
+
+    public void RightAnswer()
+    {
+        print("That is the right answer");
+    }
+
+    public void WrongAnswer()
+    {
+        print("That is the wrong answer");
     }
 
     #region Pickup Holding
@@ -159,88 +204,11 @@ public class VRInteractiveItem : MonoBehaviour {
     IEnumerator HoldTimer()
     {
         print("Started");
-        //yield return new WaitForSeconds(2);
-        HoldPickup();
         yield return new WaitForSeconds(2);
+        HoldPickup();
+        yield return new WaitForSeconds(4);
         PutBackPickup();
         StopCoroutine(HoldTimer());
-    }
-    #endregion
-
-    #region Teleporting
-    //Teleport to the pad with an offset
-    void UpdateTeleport()
-    {
-        camHold.transform.position = transform.position + offset;
-        vrEye.loadingField.fillAmount = 0;
-    }
-    #endregion
-
-    #region Buttons
-    //Check if the awnser on the button is the right one if so execute the upper part if not execute the botom part
-    void UpdateButtons()
-    {
-        if (rightAnswer)
-        {
-            RightAnswer();
-        }
-        else if (!rightAnswer)
-        {
-            WrongAnswer();
-        }
-        vrEye.loadingField.fillAmount = 0;
-    }
-
-    public void RightAnswer()
-    {
-        print("That is the right answer");
-    }
-
-    public void WrongAnswer()
-    {
-        print("That is the wrong answer");
-    }
-    #endregion
-
-    #region Keys
-    //Add the key to the inventory, send message if something imposible happens
-    void UpdateKeys()
-    {
-        if (!inv.keys.Contains(gameObject))
-        {
-            inv.keys.Add(this.gameObject);
-            gameObject.SetActive(false);
-            inv.ItemCounter();
-            vrEye.loadingField.fillAmount = 0;
-        }
-        else if (inv.keys.Contains(gameObject))
-        {
-            print("how are you doing this you aren't able to see the key");
-        }
-    }
-    #endregion
-
-    #region Doorlocks
-    //check if the door is already used if not use the key to unlock, if it is do nothing
-    void UpdateDoorlocks()
-    {
-        if (!usedAlready)
-        {
-            print("doorlock");
-            vrEye.loadingField.fillAmount = 0;
-            if (inv.keys.Count > 0)
-            {
-                usedAlready = true;
-                inv.UseKey();
-                renderer.material.color = newColor;
-            }
-        }
-        else if (usedAlready)
-        {
-            renderer.material.color = newColor;
-            print("doorlock");
-            vrEye.loadingField.fillAmount = 0;
-        }
     }
     #endregion
 }

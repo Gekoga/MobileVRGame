@@ -20,11 +20,24 @@ public class VREyeRaycaster : MonoBehaviour {
     public Transform holdPosition;               //The position where the pickup will be held at
     public bool isHolding = false;               //Check if you have something in your hands
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
         holdPosition = holdGObject.transform;
-	}
+
+        foreach (VRInteractiveItem pads in teleportPads)
+        {
+            float distance = Vector3.Distance(this.transform.position, pads.transform.position);
+            if (distance > lookDistance)
+            {
+                pads.gameObject.SetActive(false);
+            }
+            if (distance <= lookDistance)
+            {
+                pads.gameObject.SetActive(true);
+            }
+        }
+    }
 
     // Update is called once per frame
     void Update()

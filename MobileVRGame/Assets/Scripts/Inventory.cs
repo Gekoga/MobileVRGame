@@ -10,8 +10,7 @@ public class Inventory : MonoBehaviour {
     public GameObject door;
 
     [Header("animations")]
-    public Animator doorOneLeft;
-    public Animator doorOneRight;
+    public Animator firstMainDoors;
 
     bool alreadyOpen = false;
 
@@ -34,8 +33,7 @@ public class Inventory : MonoBehaviour {
         {
             print("Open the door");
             alreadyOpen = true;
-            doorOneLeft.SetTrigger("OpenDoor");
-            doorOneRight.SetTrigger("OpenDoor");
+            firstMainDoors.SetTrigger("OpenDoor");
             return;
         }
 
