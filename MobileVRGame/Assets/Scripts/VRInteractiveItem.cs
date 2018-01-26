@@ -36,7 +36,7 @@ public class VRInteractiveItem : MonoBehaviour {
     public bool rightAnswer;            //Shows if it is the right answers
 
     [Header("DoorLock only")]
-    public bool usedAlready;
+    public bool usedAlready;            //Checks if you already unlocked one of the locks
 
 	// Use this for initialization
 	void Start()

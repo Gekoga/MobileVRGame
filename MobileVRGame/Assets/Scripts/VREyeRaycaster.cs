@@ -13,7 +13,7 @@ public class VREyeRaycaster : MonoBehaviour {
     public float lookDistance;                   //How far the player can look
 
     [Space]
-    public List<VRInteractiveItem> teleportPads = new List<VRInteractiveItem>();
+    public List<VRInteractiveItem> teleportPads = new List<VRInteractiveItem>(); //All the teleportpads
 
     [Space][Header("Item holding variables")]
     public GameObject holdGObject;               //The object to get the holdposition
@@ -23,8 +23,10 @@ public class VREyeRaycaster : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        //Get the position of the holding point
         holdPosition = holdGObject.transform;
 
+        //Make all the teleportpads out of range disapear
         foreach (VRInteractiveItem pads in teleportPads)
         {
             float distance = Vector3.Distance(this.transform.position, pads.transform.position);
@@ -42,6 +44,7 @@ public class VREyeRaycaster : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        //Check if the player is looking at something
         RaycastHit Hit;
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         if (isHolding == false)

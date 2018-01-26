@@ -7,12 +7,10 @@ public class Inventory : MonoBehaviour {
     public List<GameObject> items = new List<GameObject>(); //List for all the pickup items
     public List<GameObject> keys = new List<GameObject>();  //List for all the keys
 
-    public GameObject door;
-
     [Header("animations")]
-    public Animator firstMainDoors;
+    public Animator firstMainDoors;                         //A way to activate an animation
 
-    bool alreadyOpen = false;
+    bool alreadyOpen = false;                               
 
 	// Use this for initialization
 	void Start ()
@@ -40,12 +38,12 @@ public class Inventory : MonoBehaviour {
         //Check how many items there are in the Keys list
         if (keys.Count == 3)
         {
-            door.SetActive(false);
             print("the locked door is unlocked");
             return;
         }
     }
 
+    //Check if there are more then 0 keys in the inventory, and use the key
     public void UseKey()
     {
         if (keys.Count > 0)
