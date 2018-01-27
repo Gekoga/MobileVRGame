@@ -14,6 +14,7 @@ public class VREyeRaycaster : MonoBehaviour {
 
     [Space]
     public List<VRInteractiveItem> teleportPads = new List<VRInteractiveItem>(); //All the teleportpads
+    public List<Animator> doorAnimators = new List<Animator>();                  //All the animators on doors
 
     [Space][Header("Item holding variables")]
     public GameObject holdGObject;               //The object to get the holdposition
@@ -39,6 +40,19 @@ public class VREyeRaycaster : MonoBehaviour {
                 pads.gameObject.SetActive(true);
             }
         }
+
+        foreach (Animator _anim in doorAnimators)
+        {
+            float distance = Vector3.Distance(this.transform.position, _anim.transform.position);
+            if (distance > lookDistance)
+            {
+                _anim.SetBool("CloseBy", false);
+            }
+            else if (distance <= lookDistance)
+            {
+                _anim.SetBool("CloseBy", true);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -57,6 +71,7 @@ public class VREyeRaycaster : MonoBehaviour {
                     viewedItem = Hit.transform.gameObject;
                     vrItem = viewedItem.GetComponent<VRInteractiveItem>();
                     vrItem.Selected();
+
                     foreach (VRInteractiveItem pads in teleportPads)
                     {
                         float distance = Vector3.Distance(this.transform.position, pads.transform.position);
@@ -67,6 +82,19 @@ public class VREyeRaycaster : MonoBehaviour {
                         if (distance <= lookDistance)
                         {
                             pads.gameObject.SetActive(true);
+                        }
+                    }
+
+                    foreach (Animator _anim in doorAnimators)
+                    {
+                        float distance = Vector3.Distance(this.transform.position, _anim.transform.position);
+                        if (distance > lookDistance)
+                        {
+                            _anim.SetBool("CloseBy", false);
+                        }
+                        else if (distance <= lookDistance)
+                        {
+                            _anim.SetBool("CloseBy", true);
                         }
                     }
                 }

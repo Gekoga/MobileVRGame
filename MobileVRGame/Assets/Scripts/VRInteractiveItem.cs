@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VRInteractiveItem : MonoBehaviour {
+public class VRInteractiveItem : MonoBehaviour
+{
     public enum Interactables
     {
         Teleport,
@@ -69,7 +70,7 @@ public class VRInteractiveItem : MonoBehaviour {
     //You have the object selected
     public void Selected ()
     {
-        if (interactables != Interactables.Button)
+        if (interactables != Interactables.Button || interactables != Interactables.DoorLock)
         {
             renderer.material.color = newColor;
         }
@@ -112,7 +113,10 @@ public class VRInteractiveItem : MonoBehaviour {
         renderer.material.color = startcolor;
         if (interactables == Interactables.DoorLock)
         {
-            renderer.material.color = newColor;
+            if (usedAlready)
+            {
+                renderer.material.color = newColor;
+            }
         }
     }
 
@@ -211,6 +215,7 @@ public class VRInteractiveItem : MonoBehaviour {
             inv.keys.Add(this.gameObject);
             gameObject.SetActive(false);
             inv.ItemCounter();
+            inv.keyCount++;
             vrEye.loadingField.fillAmount = 0;
         }
         else if (inv.keys.Contains(gameObject))
