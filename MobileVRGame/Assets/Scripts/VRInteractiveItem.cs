@@ -18,6 +18,7 @@ public class VRInteractiveItem : MonoBehaviour
 
     public VREyeRaycaster vrEye;        //Reference to the main cam
     public Inventory inv;               //Reference to the inventory script
+    public QuestionManager qManager;    //Reference to the QuestionManager script
 
     [Header("Basic stuff")]
     public Renderer renderer;           //The renderer for the colors
@@ -68,11 +69,14 @@ public class VRInteractiveItem : MonoBehaviour
 	}
 
     //You have the object selected
-    public void Selected ()
+    public void Selected()
     {
-        if (interactables != Interactables.Button || interactables != Interactables.DoorLock)
+        if (renderer)
         {
-            renderer.material.color = newColor;
+            if (interactables != Interactables.Button || interactables != Interactables.DoorLock)
+            {
+                renderer.material.color = newColor;
+            }
         }
         
 
@@ -198,6 +202,7 @@ public class VRInteractiveItem : MonoBehaviour
     public void RightAnswer()
     {
         print("That is the right answer");
+        qManager.QuestionChanger();
     }
 
     public void WrongAnswer()
