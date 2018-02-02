@@ -12,13 +12,13 @@ public class VRInteractiveItem : MonoBehaviour
         Key,
         Furniture,
         DoorLock,
+        Deur,
     }
 
     public Interactables interactables;
 
     public VREyeRaycaster vrEye;        //Reference to the main cam
     public Inventory inv;               //Reference to the inventory script
-    public QuestionManager qManager;    //Reference to the QuestionManager script
 
     [Header("Basic stuff")]
     public Renderer renderer;           //The renderer for the colors
@@ -69,14 +69,11 @@ public class VRInteractiveItem : MonoBehaviour
 	}
 
     //You have the object selected
-    public void Selected()
+    public void Selected ()
     {
-        if (renderer)
+        if (interactables != Interactables.Button || interactables != Interactables.DoorLock)
         {
-            if (interactables != Interactables.Button || interactables != Interactables.DoorLock)
-            {
-                renderer.material.color = newColor;
-            }
+            renderer.material.color = newColor;
         }
         
 
@@ -104,6 +101,10 @@ public class VRInteractiveItem : MonoBehaviour
                 break;
             case Interactables.Furniture:
                 print("Play animation");
+                break;
+            case Interactables.Deur:
+                print("Play ,open deur, animation");
+                UpdateDeur();
                 break;
             default:
                 print("default");
@@ -202,7 +203,6 @@ public class VRInteractiveItem : MonoBehaviour
     public void RightAnswer()
     {
         print("That is the right answer");
-        qManager.QuestionChanger();
     }
 
     public void WrongAnswer()
@@ -251,6 +251,13 @@ public class VRInteractiveItem : MonoBehaviour
             print("doorlock");
             vrEye.loadingField.fillAmount = 0;
         }
+    }
+    #endregion
+
+    #region Deur
+    void UpdateDeur()
+    {
+        vrEye.loadingField.fillAmount = 0;
     }
     #endregion
 }
