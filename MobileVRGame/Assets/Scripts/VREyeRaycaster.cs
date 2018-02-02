@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class VREyeRaycaster : MonoBehaviour {
 
     public LayerMask interactableLayer;          //The layer of objects the gaze controller can interact with
+    public LayerMask ignoreLayer;                //The layer of objects that you need to ignore, mostly colliders
     public Image loadingField;                   //The image of the loading bar/circle 
     [SerializeField] private float loadingSpeed; //How fast the loading bar gets full
     public GameObject viewedItem;                //The item you are looking at
@@ -63,52 +64,59 @@ public class VREyeRaycaster : MonoBehaviour {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         if (isHolding == false)
         {
-            if (Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, interactableLayer))
+            if (Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, ignoreLayer))
             {
-                loadingField.fillAmount += loadingSpeed;
-                if (loadingField.fillAmount == 1)
+                return;
+            }
+            else if (!Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, ignoreLayer))
+            {
+                if (Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, interactableLayer))
                 {
-                    viewedItem = Hit.transform.gameObject;
-                    vrItem = viewedItem.GetComponent<VRInteractiveItem>();
-                    vrItem.Selected();
-
-                    foreach (VRInteractiveItem pads in teleportPads)
+                    loadingField.fillAmount += loadingSpeed;
+                    if (loadingField.fillAmount == 1)
                     {
-                        float distance = Vector3.Distance(this.transform.position, pads.transform.position);
-                        if (distance > lookDistance)
-                        {
-                            pads.gameObject.SetActive(false);
-                        }
-                        if (distance <= lookDistance)
-                        {
-                            pads.gameObject.SetActive(true);
-                        }
-                    }
+                        viewedItem = Hit.transform.gameObject;
+                        vrItem = viewedItem.GetComponent<VRInteractiveItem>();
+                        vrItem.Selected();
 
-                    foreach (Animator _anim in doorAnimators)
-                    {
-                        float distance = Vector3.Distance(this.transform.position, _anim.transform.position);
-                        if (distance > lookDistance)
+                        foreach (VRInteractiveItem pads in teleportPads)
                         {
-                            _anim.SetBool("CloseBy", false);
+                            float distance = Vector3.Distance(this.transform.position, pads.transform.position);
+                            if (distance > lookDistance)
+                            {
+                                pads.gameObject.SetActive(false);
+                            }
+                            if (distance <= lookDistance)
+                            {
+                                pads.gameObject.SetActive(true);
+                            }
                         }
-                        else if (distance <= lookDistance)
+
+                        foreach (Animator _anim in doorAnimators)
                         {
-                            _anim.SetBool("CloseBy", true);
+                            float distance = Vector3.Distance(this.transform.position, _anim.transform.position);
+                            if (distance > lookDistance)
+                            {
+                                _anim.SetBool("CloseBy", false);
+                            }
+                            else if (distance <= lookDistance)
+                            {
+                                _anim.SetBool("CloseBy", true);
+                            }
                         }
                     }
                 }
-            }
-            else if (!Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, interactableLayer))
-            {
-                if (viewedItem != null && vrItem.interactables != VRInteractiveItem.Interactables.Button)
+                else if (!Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, interactableLayer))
                 {
-                    vrItem.Deselected();
+                    if (viewedItem != null && vrItem.interactables != VRInteractiveItem.Interactables.Button)
+                    {
+                        vrItem.Deselected();
+                    }
+                    loadingField.fillAmount = 0;
+                    vrItem = null;
+                    viewedItem = null;
                 }
-                loadingField.fillAmount = 0;
-                vrItem = null;
-                viewedItem = null;
-            }
+            }   
         }
     }
 }
