@@ -50,10 +50,12 @@ public class VREyeRaycaster : MonoBehaviour {
             if (distance > lookDistance)
             {
                 _anim.SetBool("CloseBy", false);
+                print(_anim);
             }
             else if (distance <= lookDistance)
             {
                 _anim.SetBool("CloseBy", true);
+                print(_anim);
             }
         }
     }
@@ -64,61 +66,56 @@ public class VREyeRaycaster : MonoBehaviour {
         //Check if the player is looking at something
         RaycastHit Hit;
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+
         if (isHolding == false)
         {
-            if (Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, ignoreLayer))
+            if (Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, interactableLayer) && Hit.transform.tag != "Wall")
             {
-                return;
+                print(loadingField);
+                loadingField.fillAmount += loadingSpeed;
+                if (loadingField.fillAmount == 1)
+                {
+                    viewedItem = Hit.transform.gameObject;
+                    vrItem = viewedItem.GetComponent<VRInteractiveItem>();
+                    vrItem.Selected();
+
+                    foreach (VRInteractiveItem pads in teleportPads)
+                    {
+                        float distance = Vector3.Distance(this.transform.position, pads.transform.position);
+                        if (distance > lookDistance)
+                        {
+                            pads.gameObject.SetActive(false);
+                        }
+                        if (distance <= lookDistance)
+                        {
+                            pads.gameObject.SetActive(true);
+                        }
+                    }
+
+                    foreach (Animator _anim in doorAnimators)
+                    {
+                        float distance = Vector3.Distance(this.transform.position, _anim.transform.position);
+                        if (distance > lookDistance)
+                        {
+                            _anim.SetBool("CloseBy", false);
+                        }
+                        else if (distance <= lookDistance)
+                        {
+                            _anim.SetBool("CloseBy", true);
+                        }
+                    }
+                }
             }
-            else if (!Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, ignoreLayer))
+            else
             {
-                if (Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, interactableLayer))
+                if (viewedItem != null && vrItem.interactables != VRInteractiveItem.Interactables.Button)
                 {
-                    loadingField.fillAmount += loadingSpeed;
-                    if (loadingField.fillAmount == 1)
-                    {
-                        viewedItem = Hit.transform.gameObject;
-                        vrItem = viewedItem.GetComponent<VRInteractiveItem>();
-                        vrItem.Selected();
-
-                        foreach (VRInteractiveItem pads in teleportPads)
-                        {
-                            float distance = Vector3.Distance(this.transform.position, pads.transform.position);
-                            if (distance > lookDistance)
-                            {
-                                pads.gameObject.SetActive(false);
-                            }
-                            if (distance <= lookDistance)
-                            {
-                                pads.gameObject.SetActive(true);
-                            }
-                        }
-
-                        foreach (Animator _anim in doorAnimators)
-                        {
-                            float distance = Vector3.Distance(this.transform.position, _anim.transform.position);
-                            if (distance > lookDistance)
-                            {
-                                _anim.SetBool("CloseBy", false);
-                            }
-                            else if (distance <= lookDistance)
-                            {
-                                _anim.SetBool("CloseBy", true);
-                            }
-                        }
-                    }
+                    vrItem.Deselected();
                 }
-                else if (!Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, interactableLayer))
-                {
-                    if (viewedItem != null && vrItem.interactables != VRInteractiveItem.Interactables.Button)
-                    {
-                        vrItem.Deselected();
-                    }
-                    loadingField.fillAmount = 0;
-                    vrItem = null;
-                    viewedItem = null;
-                }
-            }   
+                loadingField.fillAmount = 0;
+                vrItem = null;
+                viewedItem = null;
+            }  
         }
     }
 }
