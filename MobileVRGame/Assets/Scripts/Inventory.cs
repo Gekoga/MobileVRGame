@@ -10,9 +10,12 @@ public class Inventory : MonoBehaviour {
     public int keyCount = 0;                                //Check how many keys are collected in the game
     public int keysUsed = 0;                                //Check how many keys are used to unlock the last door
 
+    public int questionsRight;
+
     [Header("Animations")]
     public Animator firstMainDoors;                         //The animation of the door to the second room
     public Animator secondMainDoors;                        //The animation of the door to the shutel
+    public Animator labDoor;
 
     bool firstOpen = false;                                 //Check if the first door is already open
     bool secondOpen = false;                                //Chekc if the second door is already open
@@ -64,6 +67,18 @@ public class Inventory : MonoBehaviour {
             return;
         }
  
+    }
+
+    public void QCounter()
+    {
+        print("This is the QCounter function");
+        questionsRight++;
+        Debug.Log(questionsRight);
+
+        if (questionsRight == 3 || questionsRight > 3)
+        {
+            labDoor.SetTrigger("OpenDoor");
+        }
     }
 
 
