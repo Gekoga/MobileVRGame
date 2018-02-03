@@ -19,8 +19,7 @@ public class VRInteractiveItem : MonoBehaviour
 
     public VREyeRaycaster vrEye;        //Reference to the main cam
     public Inventory inv;               //Reference to the inventory script
-    public QuestionManager quest;      //Reference to the question manager
-
+    
     [Header("Basic stuff")]
     public Renderer renderer;           //The renderer for the colors
     public Color startcolor;            //The color the object has if you start the game
@@ -28,15 +27,16 @@ public class VRInteractiveItem : MonoBehaviour
     private Vector3 offset;             //The distance between the player and the center of the object
     private Vector3 startPos;           //The position it is when the game starts (Pickup)
     private Quaternion startRot;        //The rotation it is when the game starts (Pickup)
-    public GameObject camHold;          //The gameobject that you use to teleport to to a pad
 
     [Header("Pickup only")]
     public GameObject doorLock;         //The gameobject that turns green when you collect a pickup
     public MeshRenderer doorRenderer;   //How you make doorLock change color
     public Color green;                 //The color the doorlocks will have once you've picked up a tablet
+    public GameObject camHold;          //The gameobject that you use to teleport to to a pad
 
     [Header("Button only")]
     public bool rightAnswer;            //Shows if it is the right answers
+    public QuestionManager quest;      //Reference to the question manager
 
     [Header("DoorLock only")]
     public bool usedAlready;            //Checks if you already unlocked one of the locks
@@ -52,8 +52,12 @@ public class VRInteractiveItem : MonoBehaviour
         //Get startcolor
         if (interactables != Interactables.Button)
         {
-            renderer = GetComponent<Renderer>();
-            renderer.material.color = startcolor;
+            if (interactables != Interactables.Furniture)
+            {
+                renderer = GetComponent<Renderer>();
+                renderer.material.color = startcolor;
+            }
+
         }
 
         //Check if it is a pickup, Yes? Then get the doorRenderer
@@ -76,7 +80,11 @@ public class VRInteractiveItem : MonoBehaviour
         {
             if (interactables != Interactables.DoorLock)
             {
-                renderer.material.color = newColor;
+                if (interactables != Interactables.Furniture)
+                {
+                    renderer.material.color = newColor;
+                }
+
             }
         }
         
@@ -107,7 +115,7 @@ public class VRInteractiveItem : MonoBehaviour
                 print("Play animation");
                 break;
             case Interactables.Deur:
-                print("Play ,open deur, animation");
+                print("Play, open deur, animation");
                 UpdateDeur();
                 break;
             default:
@@ -206,13 +214,11 @@ public class VRInteractiveItem : MonoBehaviour
 
     public void RightAnswer()
     {
-        print("That is the right answer");
-        //quest.QuestionChanger();
+        quest.QuestionChanger();
     }
 
     public void WrongAnswer()
     {
-        print("That is the wrong answer");
     }
     #endregion
 
@@ -241,7 +247,6 @@ public class VRInteractiveItem : MonoBehaviour
     {
         if (!usedAlready)
         {
-            print("doorlock");
             vrEye.loadingField.fillAmount = 0;
             if (inv.keys.Count > 0)
             {

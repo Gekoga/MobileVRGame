@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class VREyeRaycaster : MonoBehaviour {
 
     public LayerMask interactableLayer;          //The layer of objects the gaze controller can interact with
-    public LayerMask ignoreLayer;                //The layer of objects that you need to ignore, mostly colliders
 
     public Image loadingField;                   //The image of the loading bar/circle 
     [SerializeField] private float loadingSpeed; //How fast the loading bar gets full
@@ -110,7 +109,10 @@ public class VREyeRaycaster : MonoBehaviour {
             {
                 if (viewedItem != null && vrItem.interactables != VRInteractiveItem.Interactables.Button)
                 {
-                    vrItem.Deselected();
+                    if (vrItem.interactables != VRInteractiveItem.Interactables.Furniture)
+                    {
+                        vrItem.Deselected();
+                    }
                 }
                 loadingField.fillAmount = 0;
                 vrItem = null;
