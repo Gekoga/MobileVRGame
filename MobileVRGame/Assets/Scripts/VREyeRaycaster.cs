@@ -16,7 +16,7 @@ public class VREyeRaycaster : MonoBehaviour {
 
     [Space]
     public List<VRInteractiveItem> teleportPads = new List<VRInteractiveItem>(); //All the teleportpads
-    public List<Animator> doorAnimators = new List<Animator>();                  //All the animators on doors
+    public List<Animator> objectAnimators = new List<Animator>();                //All the animators on doors and furniture
 
     [Space][Header("Item holding variables")]
     public GameObject holdGObject;               //The object to get the holdposition
@@ -43,7 +43,7 @@ public class VREyeRaycaster : MonoBehaviour {
             }
         }
 
-        foreach (Animator _anim in doorAnimators)
+        foreach (Animator _anim in objectAnimators)
         {
             float distance = Vector3.Distance(this.transform.position, _anim.transform.position);
             if (distance > lookDistance)
@@ -88,7 +88,7 @@ public class VREyeRaycaster : MonoBehaviour {
                         }
                     }
 
-                    foreach (Animator _anim in doorAnimators)
+                    foreach (Animator _anim in objectAnimators)
                     {
                         float distance = Vector3.Distance(this.transform.position, _anim.transform.position);
                         if (distance > lookDistance)
