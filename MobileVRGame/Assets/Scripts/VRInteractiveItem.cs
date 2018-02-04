@@ -19,7 +19,7 @@ public class VRInteractiveItem : MonoBehaviour
 
     public VREyeRaycaster vrEye;        //Reference to the main cam
     public Inventory inv;               //Reference to the inventory script
-    
+
     [Header("Basic stuff")]
     public Renderer renderer;           //The renderer for the colors
     public Color startcolor;            //The color the object has if you start the game
@@ -41,9 +41,11 @@ public class VRInteractiveItem : MonoBehaviour
     [Header("DoorLock only")]
     public bool usedAlready;            //Checks if you already unlocked one of the locks
 
-	// Use this for initialization
-	void Start()
-    { 
+    private Animator anim;
+
+    // Use this for initialization
+    void Start()
+    {
         //Get startposition
         offset = new Vector3(0, 1.5f, 0);
         startPos = gameObject.transform.position;
@@ -65,18 +67,24 @@ public class VRInteractiveItem : MonoBehaviour
         {
             doorRenderer = doorLock.GetComponent<MeshRenderer>();
         }
+
+        //Check if it is furniture, Yes? Then get the animator
+        if (interactables == Interactables.Furniture)
+        {
+            anim = GetComponent<Animator>();
+        }
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-		
-	}
+
+    }
 
     //You have the object selected
-    public void Selected ()
+    public void Selected()
     {
-        if (interactables != Interactables.Button) 
+        if (interactables != Interactables.Button)
         {
             if (interactables != Interactables.DoorLock)
             {
@@ -87,7 +95,7 @@ public class VRInteractiveItem : MonoBehaviour
 
             }
         }
-        
+
 
         //Check what the function is
         switch (interactables)
@@ -113,6 +121,7 @@ public class VRInteractiveItem : MonoBehaviour
                 break;
             case Interactables.Furniture:
                 print("Play animation");
+                StartCoroutine(WaitForBoolChange());
                 break;
             case Interactables.Deur:
                 print("Play, open deur, animation");
@@ -268,6 +277,28 @@ public class VRInteractiveItem : MonoBehaviour
     void UpdateDeur()
     {
         vrEye.loadingField.fillAmount = 0;
+    }
+    #endregion
+
+    #region Furniture
+    void OpenLocker()
+    {
+
+        anim.SetBool("GazeAt", true);
+        vrEye.loadingField.fillAmount = 0;
+    }
+
+    void CloseLocker()
+    {
+        anim.SetBool("GazeAt", false);
+    }
+
+    IEnumerator WaitForBoolChange()
+    {
+        OpenLocker();
+        yield return new WaitForSeconds(1);
+        CloseLocker();
+        StopCoroutine(WaitForBoolChange());
     }
     #endregion
 }

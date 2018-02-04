@@ -49,12 +49,10 @@ public class VREyeRaycaster : MonoBehaviour {
             if (distance > lookDistance)
             {
                 _anim.SetBool("CloseBy", false);
-                print(_anim);
             }
             else if (distance <= lookDistance)
             {
                 _anim.SetBool("CloseBy", true);
-                print(_anim);
             }
         }
     }
@@ -70,7 +68,6 @@ public class VREyeRaycaster : MonoBehaviour {
         {
             if (Physics.Raycast(ray.origin, ray.direction, out Hit, lookDistance, interactableLayer) && Hit.transform.tag != "Wall")
             {
-                print(loadingField);
                 loadingField.fillAmount += loadingSpeed;
                 if (loadingField.fillAmount == 1)
                 {
