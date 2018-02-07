@@ -32,7 +32,7 @@ public class VRInteractiveItem : MonoBehaviour
     public GameObject doorLock;         //The gameobject that turns green when you collect a pickup
     public MeshRenderer doorRenderer;   //How you make doorLock change color
     public Color green;                 //The color the doorlocks will have once you've picked up a tablet
-    public GameObject camHold;          //The gameobject that you use to teleport to to a pad
+    public GameObject camParent;        //The gameobject that you use to teleport to to a pad
 
     [Header("Button only")]
     public bool rightAnswer;            //Shows if it is the right answers
@@ -201,7 +201,7 @@ public class VRInteractiveItem : MonoBehaviour
     //Teleport to the pad with an offset
     void UpdateTeleport()
     {
-        camHold.transform.position = transform.position + offset;
+        camParent.transform.position = transform.position + offset;
         vrEye.loadingField.fillAmount = 0;
     }
     #endregion

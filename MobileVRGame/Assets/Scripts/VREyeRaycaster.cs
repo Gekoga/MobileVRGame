@@ -49,10 +49,12 @@ public class VREyeRaycaster : MonoBehaviour {
             if (distance > lookDistance)
             {
                 _anim.SetBool("CloseBy", false);
+                print("False");
             }
             else if (distance <= lookDistance)
             {
                 _anim.SetBool("CloseBy", true);
+                print("True");
             }
         }
     }
