@@ -12,7 +12,6 @@ public class VRInteractiveItem : MonoBehaviour
         Key,
         Furniture,
         DoorLock,
-        Deur,
     }
 
     public Interactables interactables;
@@ -51,15 +50,17 @@ public class VRInteractiveItem : MonoBehaviour
         startPos = gameObject.transform.position;
         startRot = gameObject.transform.rotation;
 
-        //Get startcolor
+        //Get startcolor unless it's one of these
         if (interactables != Interactables.Button)
         {
             if (interactables != Interactables.Furniture)
             {
-                renderer = GetComponent<Renderer>();
-                renderer.material.color = startcolor;
+                if (interactables != Interactables.Key)
+                {
+                    renderer = GetComponent<Renderer>();
+                    renderer.material.color = startcolor;
+                }
             }
-
         }
 
         //Check if it is a pickup, Yes? Then get the doorRenderer
@@ -122,10 +123,6 @@ public class VRInteractiveItem : MonoBehaviour
             case Interactables.Furniture:
                 print("Play animation");
                 StartCoroutine(WaitForBoolChange());
-                break;
-            case Interactables.Deur:
-                print("Play, open deur, animation");
-                UpdateDeur();
                 break;
             default:
                 print("default");
@@ -270,13 +267,6 @@ public class VRInteractiveItem : MonoBehaviour
             print("doorlock");
             vrEye.loadingField.fillAmount = 0;
         }
-    }
-    #endregion
-
-    #region Deur
-    void UpdateDeur()
-    {
-        vrEye.loadingField.fillAmount = 0;
     }
     #endregion
 
