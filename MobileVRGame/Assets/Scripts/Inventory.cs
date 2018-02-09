@@ -50,7 +50,6 @@ public class Inventory : MonoBehaviour {
         if (keys.Count > 0)
         {
             keys.IndexOf(keys[0]);
-            print("It works ");
             keysUsed++;
             keys[0].SetActive(true);
             keys.Remove(keys[0]);
@@ -71,10 +70,7 @@ public class Inventory : MonoBehaviour {
 
     public void QCounter()
     {
-        print("This is the QCounter function");
         questionsRight++;
-        Debug.Log(questionsRight);
-
         if (questionsRight == 3 || questionsRight > 3)
         {
             labDoor.SetTrigger("OpenDoor");

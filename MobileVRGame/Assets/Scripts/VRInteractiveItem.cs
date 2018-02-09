@@ -18,7 +18,6 @@ public class VRInteractiveItem : MonoBehaviour
 
     public VREyeRaycaster vrEye;        //Reference to the main cam
     public Inventory inv;               //Reference to the inventory script
-    public QuestionManager qManager;    //Reference to the QuestionManager script
 
     [Header("Basic stuff")]
     public Renderer renderer;           //The renderer for the colors
@@ -27,32 +26,41 @@ public class VRInteractiveItem : MonoBehaviour
     private Vector3 offset;             //The distance between the player and the center of the object
     private Vector3 startPos;           //The position it is when the game starts (Pickup)
     private Quaternion startRot;        //The rotation it is when the game starts (Pickup)
-    public GameObject camHold;          //The gameobject that you use to teleport to to a pad
 
     [Header("Pickup only")]
     public GameObject doorLock;         //The gameobject that turns green when you collect a pickup
     public MeshRenderer doorRenderer;   //How you make doorLock change color
     public Color green;                 //The color the doorlocks will have once you've picked up a tablet
+    public GameObject camParent;        //The gameobject that you use to teleport to to a pad
 
     [Header("Button only")]
     public bool rightAnswer;            //Shows if it is the right answers
+    public QuestionManager quest;      //Reference to the question manager
 
     [Header("DoorLock only")]
     public bool usedAlready;            //Checks if you already unlocked one of the locks
 
-	// Use this for initialization
-	void Start()
-    { 
+    private Animator anim;
+
+    // Use this for initialization
+    void Start()
+    {
         //Get startposition
         offset = new Vector3(0, 1.5f, 0);
         startPos = gameObject.transform.position;
         startRot = gameObject.transform.rotation;
 
-        //Get startcolor
+        //Get startcolor unless it's one of these
         if (interactables != Interactables.Button)
         {
-            renderer = GetComponent<Renderer>();
-            renderer.material.color = startcolor;
+            if (interactables != Interactables.Furniture)
+            {
+                if (interactables != Interactables.Key)
+                {
+                    renderer = GetComponent<Renderer>();
+                    renderer.material.color = startcolor;
+                }
+            }
         }
 
         //Check if it is a pickup, Yes? Then get the doorRenderer
@@ -60,25 +68,35 @@ public class VRInteractiveItem : MonoBehaviour
         {
             doorRenderer = doorLock.GetComponent<MeshRenderer>();
         }
+
+        //Check if it is furniture, Yes? Then get the animator
+        if (interactables == Interactables.Furniture)
+        {
+            anim = GetComponent<Animator>();
+        }
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-		
-	}
+
+    }
 
     //You have the object selected
     public void Selected()
     {
-        if (renderer)
+        if (interactables != Interactables.Button)
         {
-            if (interactables != Interactables.Button || interactables != Interactables.DoorLock)
+            if (interactables != Interactables.DoorLock)
             {
-                renderer.material.color = newColor;
+                if (interactables != Interactables.Furniture)
+                {
+                    renderer.material.color = newColor;
+                }
+
             }
         }
-        
+
 
         //Check what the function is
         switch (interactables)
@@ -104,6 +122,7 @@ public class VRInteractiveItem : MonoBehaviour
                 break;
             case Interactables.Furniture:
                 print("Play animation");
+                StartCoroutine(WaitForBoolChange());
                 break;
             default:
                 print("default");
@@ -179,7 +198,7 @@ public class VRInteractiveItem : MonoBehaviour
     //Teleport to the pad with an offset
     void UpdateTeleport()
     {
-        camHold.transform.position = transform.position + offset;
+        camParent.transform.position = transform.position + offset;
         vrEye.loadingField.fillAmount = 0;
     }
     #endregion
@@ -201,13 +220,11 @@ public class VRInteractiveItem : MonoBehaviour
 
     public void RightAnswer()
     {
-        print("That is the right answer");
-        qManager.QuestionChanger();
+        quest.QuestionChanger();
     }
 
     public void WrongAnswer()
     {
-        print("That is the wrong answer");
     }
     #endregion
 
@@ -236,7 +253,6 @@ public class VRInteractiveItem : MonoBehaviour
     {
         if (!usedAlready)
         {
-            print("doorlock");
             vrEye.loadingField.fillAmount = 0;
             if (inv.keys.Count > 0)
             {
@@ -251,6 +267,28 @@ public class VRInteractiveItem : MonoBehaviour
             print("doorlock");
             vrEye.loadingField.fillAmount = 0;
         }
+    }
+    #endregion
+
+    #region Furniture
+    void OpenLocker()
+    {
+
+        anim.SetBool("GazeAt", true);
+        vrEye.loadingField.fillAmount = 0;
+    }
+
+    void CloseLocker()
+    {
+        anim.SetBool("GazeAt", false);
+    }
+
+    IEnumerator WaitForBoolChange()
+    {
+        OpenLocker();
+        yield return new WaitForSeconds(1);
+        CloseLocker();
+        StopCoroutine(WaitForBoolChange());
     }
     #endregion
 }

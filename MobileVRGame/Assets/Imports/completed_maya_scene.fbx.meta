@@ -1,0 +1,668 @@
+fileFormatVersion: 2
+guid: e804bb1c67b46414a8289bb90b98a8ef
+timeCreated: 1518008524
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: beds1
+    100002: Chair
+    100004: chair:Mesh
+    100006: cockpit
+    100008: //RootNode
+    100010: cornor_seat
+    100012: Cryo_chamber:pCube3
+    100014: Cryo_chamber:polySurface19
+    100016: Desk
+    100018: door_left
+    100020: door_left 1
+    100022: door_left1
+    100024: door_left2
+    100026: door_left3
+    100028: door_left4
+    100030: door_right
+    100032: door_right 1
+    100034: door_right1
+    100036: door_right3
+    100038: door_right4
+    100040: door_right5
+    100042: floor_plate1
+    100044: floor_plate2
+    100046: generator
+    100048: generator_base
+    100050: glass_table
+    100052: glass_table1
+    100054: glass_table2
+    100056: glass_tube
+    100058: lamp_base1
+    100060: lamp_base3
+    100062: lamp_base4
+    100064: lamps1
+    100066: lamps3
+    100068: lamps4
+    100070: Microscoop:pCube27
+    100072: normal_seat
+    100074: pCube18
+    100076: pCube19
+    100078: pCube27
+    100080: pCube36
+    100082: pCylinder14
+    100084: pCylinder4
+    100086: polySurface164
+    100088: polySurface165
+    100090: polySurface166
+    100092: polySurface167
+    100094: polySurface168
+    100096: polySurface169
+    100098: polySurface170
+    100100: polySurface207
+    100102: polySurface209
+    100104: polySurface210
+    100106: polySurface211
+    100108: polySurface212
+    100110: polySurface213
+    100112: polySurface214
+    100114: polySurface215
+    100116: polySurface216
+    100118: polySurface217
+    100120: polySurface218
+    100122: polySurface219
+    100124: polySurface220
+    100126: polySurface221
+    100128: polySurface222
+    100130: polySurface230
+    100132: polySurface233
+    100134: polySurface234
+    100136: polySurface35
+    100138: polySurface50
+    100140: polySurface50 1
+    100142: polySurface50 2
+    100144: polySurface50 3
+    100146: polySurface50 4
+    100148: polySurface50 5
+    100150: polySurface50 6
+    100152: polySurface51
+    100154: polySurface51 1
+    100156: polySurface51 2
+    100158: polySurface51 3
+    100160: polySurface51 4
+    100162: polySurface51 5
+    100164: polySurface51 6
+    100166: polySurface63
+    100168: polySurface77
+    100170: polySurface81
+    100172: polySurface82
+    100174: polySurface89
+    100176: polySurface90
+    100178: polySurface91
+    100180: polySurface92
+    100182: polySurface93
+    100184: polySurface94
+    100186: polySurface95
+    100188: polySurface96
+    100190: polySurface97
+    100192: Shuttle:pCylinder7
+    100194: space_locker14
+    100196: space_locker15
+    100198: space_locker16
+    100200: space_locker17
+    100202: space_locker18
+    100204: space_locker19
+    100206: space_locker3
+    100208: table2:Mesh
+    100210: Toilet:polySurface1
+    100212: tubes
+    100214: USB_key
+    100216: wall_decoration
+    100218: wall_decoration1
+    100220: wall_decoration2
+    100222: wall_decoration3
+    100224: wall_decoration4
+    100226: wall_decoration5
+    100228: wall_inner_room_room2
+    100230: wall_inner_room_room3
+    100232: wall_inner_rooms_room1
+    100234: wall_room1
+    100236: wall_room2
+    100238: wall_screen5
+    100240: Wasbak:polySurface1
+    100242: Werk_Jochem:Chair
+    100244: Werk_Jochem:Desk
+    100246: Werk_Jochem:Screen
+    400000: beds1
+    400002: Chair
+    400004: chair:Mesh
+    400006: cockpit
+    400008: //RootNode
+    400010: cornor_seat
+    400012: Cryo_chamber:pCube3
+    400014: Cryo_chamber:polySurface19
+    400016: Desk
+    400018: door_left
+    400020: door_left 1
+    400022: door_left1
+    400024: door_left2
+    400026: door_left3
+    400028: door_left4
+    400030: door_right
+    400032: door_right 1
+    400034: door_right1
+    400036: door_right3
+    400038: door_right4
+    400040: door_right5
+    400042: floor_plate1
+    400044: floor_plate2
+    400046: generator
+    400048: generator_base
+    400050: glass_table
+    400052: glass_table1
+    400054: glass_table2
+    400056: glass_tube
+    400058: lamp_base1
+    400060: lamp_base3
+    400062: lamp_base4
+    400064: lamps1
+    400066: lamps3
+    400068: lamps4
+    400070: Microscoop:pCube27
+    400072: normal_seat
+    400074: pCube18
+    400076: pCube19
+    400078: pCube27
+    400080: pCube36
+    400082: pCylinder14
+    400084: pCylinder4
+    400086: polySurface164
+    400088: polySurface165
+    400090: polySurface166
+    400092: polySurface167
+    400094: polySurface168
+    400096: polySurface169
+    400098: polySurface170
+    400100: polySurface207
+    400102: polySurface209
+    400104: polySurface210
+    400106: polySurface211
+    400108: polySurface212
+    400110: polySurface213
+    400112: polySurface214
+    400114: polySurface215
+    400116: polySurface216
+    400118: polySurface217
+    400120: polySurface218
+    400122: polySurface219
+    400124: polySurface220
+    400126: polySurface221
+    400128: polySurface222
+    400130: polySurface230
+    400132: polySurface233
+    400134: polySurface234
+    400136: polySurface35
+    400138: polySurface50
+    400140: polySurface50 1
+    400142: polySurface50 2
+    400144: polySurface50 3
+    400146: polySurface50 4
+    400148: polySurface50 5
+    400150: polySurface50 6
+    400152: polySurface51
+    400154: polySurface51 1
+    400156: polySurface51 2
+    400158: polySurface51 3
+    400160: polySurface51 4
+    400162: polySurface51 5
+    400164: polySurface51 6
+    400166: polySurface63
+    400168: polySurface77
+    400170: polySurface81
+    400172: polySurface82
+    400174: polySurface89
+    400176: polySurface90
+    400178: polySurface91
+    400180: polySurface92
+    400182: polySurface93
+    400184: polySurface94
+    400186: polySurface95
+    400188: polySurface96
+    400190: polySurface97
+    400192: Shuttle:pCylinder7
+    400194: space_locker14
+    400196: space_locker15
+    400198: space_locker16
+    400200: space_locker17
+    400202: space_locker18
+    400204: space_locker19
+    400206: space_locker3
+    400208: table2:Mesh
+    400210: Toilet:polySurface1
+    400212: tubes
+    400214: USB_key
+    400216: wall_decoration
+    400218: wall_decoration1
+    400220: wall_decoration2
+    400222: wall_decoration3
+    400224: wall_decoration4
+    400226: wall_decoration5
+    400228: wall_inner_room_room2
+    400230: wall_inner_room_room3
+    400232: wall_inner_rooms_room1
+    400234: wall_room1
+    400236: wall_room2
+    400238: wall_screen5
+    400240: Wasbak:polySurface1
+    400242: Werk_Jochem:Chair
+    400244: Werk_Jochem:Desk
+    400246: Werk_Jochem:Screen
+    2300000: beds1
+    2300002: Chair
+    2300004: chair:Mesh
+    2300006: cockpit
+    2300008: cornor_seat
+    2300010: Cryo_chamber:pCube3
+    2300012: Cryo_chamber:polySurface19
+    2300014: Desk
+    2300016: door_left
+    2300018: door_left 1
+    2300020: door_left1
+    2300022: door_left2
+    2300024: door_left3
+    2300026: door_left4
+    2300028: door_right
+    2300030: door_right 1
+    2300032: door_right1
+    2300034: door_right3
+    2300036: door_right4
+    2300038: door_right5
+    2300040: floor_plate1
+    2300042: floor_plate2
+    2300044: generator
+    2300046: generator_base
+    2300048: glass_table
+    2300050: glass_table1
+    2300052: glass_table2
+    2300054: glass_tube
+    2300056: lamp_base1
+    2300058: lamp_base3
+    2300060: lamp_base4
+    2300062: lamps1
+    2300064: lamps3
+    2300066: lamps4
+    2300068: Microscoop:pCube27
+    2300070: normal_seat
+    2300072: pCube27
+    2300074: pCube36
+    2300076: polySurface164
+    2300078: polySurface165
+    2300080: polySurface166
+    2300082: polySurface167
+    2300084: polySurface168
+    2300086: polySurface169
+    2300088: polySurface207
+    2300090: polySurface209
+    2300092: polySurface211
+    2300094: polySurface212
+    2300096: polySurface213
+    2300098: polySurface214
+    2300100: polySurface215
+    2300102: polySurface216
+    2300104: polySurface217
+    2300106: polySurface218
+    2300108: polySurface219
+    2300110: polySurface220
+    2300112: polySurface221
+    2300114: polySurface222
+    2300116: polySurface230
+    2300118: polySurface233
+    2300120: polySurface234
+    2300122: polySurface50
+    2300124: polySurface50 1
+    2300126: polySurface50 2
+    2300128: polySurface50 3
+    2300130: polySurface50 4
+    2300132: polySurface50 5
+    2300134: polySurface50 6
+    2300136: polySurface51
+    2300138: polySurface51 1
+    2300140: polySurface51 2
+    2300142: polySurface51 3
+    2300144: polySurface51 4
+    2300146: polySurface51 5
+    2300148: polySurface51 6
+    2300150: polySurface63
+    2300152: polySurface77
+    2300154: polySurface81
+    2300156: polySurface82
+    2300158: polySurface89
+    2300160: polySurface90
+    2300162: polySurface91
+    2300164: polySurface92
+    2300166: polySurface93
+    2300168: polySurface94
+    2300170: polySurface95
+    2300172: polySurface96
+    2300174: polySurface97
+    2300176: Shuttle:pCylinder7
+    2300178: space_locker14
+    2300180: space_locker15
+    2300182: space_locker16
+    2300184: space_locker17
+    2300186: space_locker18
+    2300188: space_locker19
+    2300190: space_locker3
+    2300192: table2:Mesh
+    2300194: Toilet:polySurface1
+    2300196: tubes
+    2300198: USB_key
+    2300200: wall_decoration
+    2300202: wall_decoration1
+    2300204: wall_decoration2
+    2300206: wall_decoration3
+    2300208: wall_decoration4
+    2300210: wall_decoration5
+    2300212: wall_inner_room_room2
+    2300214: wall_inner_rooms_room1
+    2300216: wall_room1
+    2300218: wall_screen5
+    2300220: Wasbak:polySurface1
+    2300222: Werk_Jochem:Chair
+    2300224: Werk_Jochem:Desk
+    2300226: Werk_Jochem:Screen
+    3300000: beds1
+    3300002: Chair
+    3300004: chair:Mesh
+    3300006: cockpit
+    3300008: cornor_seat
+    3300010: Cryo_chamber:pCube3
+    3300012: Cryo_chamber:polySurface19
+    3300014: Desk
+    3300016: door_left
+    3300018: door_left 1
+    3300020: door_left1
+    3300022: door_left2
+    3300024: door_left3
+    3300026: door_left4
+    3300028: door_right
+    3300030: door_right 1
+    3300032: door_right1
+    3300034: door_right3
+    3300036: door_right4
+    3300038: door_right5
+    3300040: floor_plate1
+    3300042: floor_plate2
+    3300044: generator
+    3300046: generator_base
+    3300048: glass_table
+    3300050: glass_table1
+    3300052: glass_table2
+    3300054: glass_tube
+    3300056: lamp_base1
+    3300058: lamp_base3
+    3300060: lamp_base4
+    3300062: lamps1
+    3300064: lamps3
+    3300066: lamps4
+    3300068: Microscoop:pCube27
+    3300070: normal_seat
+    3300072: pCube27
+    3300074: pCube36
+    3300076: polySurface164
+    3300078: polySurface165
+    3300080: polySurface166
+    3300082: polySurface167
+    3300084: polySurface168
+    3300086: polySurface169
+    3300088: polySurface207
+    3300090: polySurface209
+    3300092: polySurface211
+    3300094: polySurface212
+    3300096: polySurface213
+    3300098: polySurface214
+    3300100: polySurface215
+    3300102: polySurface216
+    3300104: polySurface217
+    3300106: polySurface218
+    3300108: polySurface219
+    3300110: polySurface220
+    3300112: polySurface221
+    3300114: polySurface222
+    3300116: polySurface230
+    3300118: polySurface233
+    3300120: polySurface234
+    3300122: polySurface50
+    3300124: polySurface50 1
+    3300126: polySurface50 2
+    3300128: polySurface50 3
+    3300130: polySurface50 4
+    3300132: polySurface50 5
+    3300134: polySurface50 6
+    3300136: polySurface51
+    3300138: polySurface51 1
+    3300140: polySurface51 2
+    3300142: polySurface51 3
+    3300144: polySurface51 4
+    3300146: polySurface51 5
+    3300148: polySurface51 6
+    3300150: polySurface63
+    3300152: polySurface77
+    3300154: polySurface81
+    3300156: polySurface82
+    3300158: polySurface89
+    3300160: polySurface90
+    3300162: polySurface91
+    3300164: polySurface92
+    3300166: polySurface93
+    3300168: polySurface94
+    3300170: polySurface95
+    3300172: polySurface96
+    3300174: polySurface97
+    3300176: Shuttle:pCylinder7
+    3300178: space_locker14
+    3300180: space_locker15
+    3300182: space_locker16
+    3300184: space_locker17
+    3300186: space_locker18
+    3300188: space_locker19
+    3300190: space_locker3
+    3300192: table2:Mesh
+    3300194: Toilet:polySurface1
+    3300196: tubes
+    3300198: USB_key
+    3300200: wall_decoration
+    3300202: wall_decoration1
+    3300204: wall_decoration2
+    3300206: wall_decoration3
+    3300208: wall_decoration4
+    3300210: wall_decoration5
+    3300212: wall_inner_room_room2
+    3300214: wall_inner_rooms_room1
+    3300216: wall_room1
+    3300218: wall_screen5
+    3300220: Wasbak:polySurface1
+    3300222: Werk_Jochem:Chair
+    3300224: Werk_Jochem:Desk
+    3300226: Werk_Jochem:Screen
+    4300000: wall_inner_room_room2
+    4300002: lamp_base1
+    4300004: lamp_base3
+    4300006: lamp_base4
+    4300008: glass_tube
+    4300010: door_right3
+    4300012: door_left3
+    4300014: door_right4
+    4300016: door_left4
+    4300018: wall_room1
+    4300020: door_left
+    4300022: door_right
+    4300024: door_left1
+    4300026: door_right1
+    4300028: door_left
+    4300030: door_right
+    4300032: wall_inner_rooms_room1
+    4300034: space_locker3
+    4300036: polySurface50
+    4300038: polySurface51
+    4300040: beds1
+    4300042: door_left2
+    4300044: table2:Mesh
+    4300046: chair:Mesh
+    4300048: polySurface63
+    4300050: polySurface77
+    4300052: Shuttle:pCylinder7
+    4300054: Microscoop:pCube27
+    4300056: Cryo_chamber:pCube3
+    4300058: Cryo_chamber:polySurface19
+    4300060: polySurface81
+    4300062: polySurface82
+    4300064: polySurface164
+    4300066: polySurface165
+    4300068: polySurface166
+    4300070: polySurface167
+    4300072: polySurface168
+    4300074: polySurface169
+    4300076: polySurface89
+    4300078: polySurface90
+    4300080: polySurface91
+    4300082: polySurface92
+    4300084: polySurface93
+    4300086: polySurface94
+    4300088: polySurface95
+    4300090: polySurface96
+    4300092: polySurface97
+    4300094: polySurface211
+    4300096: polySurface212
+    4300098: polySurface213
+    4300100: polySurface214
+    4300102: polySurface215
+    4300104: polySurface216
+    4300106: door_right5
+    4300108: Werk_Jochem:Desk
+    4300110: Werk_Jochem:Screen
+    4300112: Werk_Jochem:Chair
+    4300114: Toilet:polySurface1
+    4300116: Wasbak:polySurface1
+    4300118: pCube36
+    4300120: normal_seat
+    4300122: Desk
+    4300124: Chair
+    4300126: wall_screen5
+    4300128: cornor_seat
+    4300130: generator
+    4300132: generator_base
+    4300134: polySurface230
+    4300136: lamps1
+    4300138: USB_key
+    4300140: wall_decoration5
+    4300142: wall_decoration1
+    4300144: wall_decoration2
+    4300146: wall_decoration
+    4300148: polySurface207
+    4300150: polySurface209
+    4300152: space_locker14
+    4300154: polySurface50
+    4300156: polySurface51
+    4300158: lamps3
+    4300160: lamps4
+    4300162: pCube27
+    4300164: polySurface217
+    4300166: polySurface218
+    4300168: polySurface219
+    4300170: polySurface220
+    4300172: polySurface221
+    4300174: polySurface222
+    4300176: wall_decoration4
+    4300178: wall_decoration3
+    4300180: tubes
+    4300182: glass_table1
+    4300184: glass_table2
+    4300186: glass_table
+    4300188: space_locker15
+    4300190: polySurface50
+    4300192: polySurface51
+    4300194: space_locker16
+    4300196: polySurface50
+    4300198: polySurface51
+    4300200: space_locker17
+    4300202: polySurface50
+    4300204: polySurface51
+    4300206: space_locker18
+    4300208: polySurface50
+    4300210: polySurface51
+    4300212: space_locker19
+    4300214: polySurface50
+    4300216: polySurface51
+    4300218: polySurface233
+    4300220: polySurface234
+    4300222: floor_plate1
+    4300224: floor_plate2
+    4300226: cockpit
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
